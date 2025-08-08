@@ -246,3 +246,11 @@ body {
         aspect-ratio: 16 / 9;
     }
 }
+
+/* Make entire image card clickable (no underline, inherit color) */
+.gallery .item > a {
+    display: block;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+}
