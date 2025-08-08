@@ -57,7 +57,7 @@ body {
 .gallery.grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-auto-rows: 250px;
+    grid-auto-rows: auto; /* was 250px; let aspect-ratio control height */
     gap: 10px;
     padding: 20px;
 }
@@ -209,4 +209,21 @@ body {
 
     /* Disable overlay behavior on mobile and show caption below */
     .gallery .item::after { display: none; }
+}
+
+/* Desktop: enforce 4:3 cards */
+@media (min-width: 769px) {
+    /* 20% bigger cards */
+    .gallery.grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+
+    .gallery .item {
+        aspect-ratio: 4 / 3;
+    }
+    .gallery .item img {
+        width: 100%;
+        height: 100%;     /* fill the 4:3 card */
+        object-fit: cover;
+    }
 }
