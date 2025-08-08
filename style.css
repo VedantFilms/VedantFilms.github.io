@@ -79,6 +79,17 @@ body {
     z-index: 1;
 }
 
+/* Make iframes behave like images in cards */
+.gallery .item iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    border-radius: inherit;
+    position: relative;
+    z-index: 1;
+}
+
 /* Dark gradient overlay on hover */
 .gallery .item::after {
     content: "";
@@ -109,9 +120,9 @@ body {
     transform: translateY(8px);
     transition: opacity 0.25s ease, transform 0.25s ease;
     z-index: 20;
-    /* remove old desktop styles */
     text-align: left;
     margin-top: 0;
+    pointer-events: none; /* allow clicks to pass through to video */
 }
 
 .gallery .item:hover .caption,
@@ -187,12 +198,12 @@ body {
 
     .gallery .item { margin-bottom: 0; }
 
-    /* Uniform cards via aspect-ratio */
-    .gallery .item img {
+    /* Uniform cards via aspect-ratio on mobile for both images and videos */
+    .gallery .item img,
+    .gallery .item iframe {
         width: 100%;
-        height: auto;       /* override desktop */
+        height: auto;
         aspect-ratio: 16 / 9;
-        object-fit: cover;
         border-radius: 8px;
     }
 
@@ -205,25 +216,33 @@ body {
         color: #ccc;
         text-align: center;
         margin-top: 5px;
+        pointer-events: auto; /* captions are normal text on mobile */
     }
 
-    /* Disable overlay behavior on mobile and show caption below */
     .gallery .item::after { display: none; }
 }
 
-/* Desktop: enforce 4:3 cards */
+/* Desktop: sizes and ratios */
 @media (min-width: 769px) {
     /* 20% bigger cards */
     .gallery.grid {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
 
+    /* Default desktop ratio for cards */
     .gallery .item {
         aspect-ratio: 4 / 3;
     }
-    .gallery .item img {
+
+    .gallery .item img,
+    .gallery .item iframe {
         width: 100%;
-        height: 100%;     /* fill the 4:3 card */
+        height: 100%;
         object-fit: cover;
+    }
+
+    /* Director videos use 16:9 to avoid distortion */
+    #director.gallery .item {
+        aspect-ratio: 16 / 9;
     }
 }
