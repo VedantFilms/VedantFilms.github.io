@@ -65,7 +65,7 @@ body {
 .gallery .item {
     position: relative;
     border-radius: 8px;
-    /* Removed overflow: hidden */
+    overflow: hidden; /* clip overlay + scaled image neatly */
 }
 
 .gallery .item img {
@@ -73,21 +73,58 @@ body {
     height: 100%;
     object-fit: cover;
     transition: transform 0.4s;
-    border-radius: inherit; /* maintain parent radius */
+    border-radius: inherit;
     display: block;
+    position: relative;
+    z-index: 1;
 }
 
+/* Dark gradient overlay on hover */
+.gallery .item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.25) 45%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 15; /* above image, below text */
+}
+
+.gallery .item:hover::after {
+    opacity: 1;
+}
+
+/* Caption becomes overlay text on desktop */
+.caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 12px 14px;
+    color: #fff;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 20;
+    /* remove old desktop styles */
+    text-align: left;
+    margin-top: 0;
+}
+
+.gallery .item:hover .caption,
+.gallery .item:focus-within .caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Optional: keep your existing image hover scale */
 .gallery .item img:hover {
     transform: scale(1.05);
     z-index: 10;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* optional shadow on hover */
-}
-
-.caption {
-    display: none; /* hide captions on desktop */
-    text-align: center;
-    color: #ccc;
-    margin-top: 5px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .about, .contact {
@@ -115,42 +152,61 @@ body {
     color: #f0f;
     z-index: 1001;
     cursor: pointer;
+    transition: left 0.3s ease; /* smooth shift when menu opens */
 }
 
 /* Mobile Styles */
 @media (max-width: 768px) {
-    .sidebar {
-        transform: translateX(-100%);
-    }
-
-    .sidebar.active {
-        transform: translateX(0);
-    }
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.active { transform: translateX(0); }
 
     .main-content {
         margin-left: 0;
         width: 100%;
+        padding-top: 56px; /* keep cards clear of the hamburger */
     }
 
     .hamburger {
         display: block;
+        top: 12px;
+        left: 12px;
     }
 
+    /* Move hamburger to the right of the 200px sidebar when open */
+    .sidebar.active ~ .hamburger {
+        left: calc(200px + 12px);
+    }
+
+    /* Keep a 1-column grid; no stacking quirks */
     .gallery.grid {
-        display: block; /* stack images */
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        /* grid-auto-rows not needed on mobile */
     }
 
-    .gallery .item {
-        margin-bottom: 20px;
-    }
+    .gallery .item { margin-bottom: 0; }
 
+    /* Uniform cards via aspect-ratio */
     .gallery .item img {
-        border-radius: 0;
         width: 100%;
-        height: auto;
+        height: auto;       /* override desktop */
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        border-radius: 8px;
     }
 
     .caption {
-        display: block; /* show captions on mobile */
+        position: static;
+        opacity: 1;
+        transform: none;
+        padding: 0;
+        text-shadow: none;
+        color: #ccc;
+        text-align: center;
+        margin-top: 5px;
     }
+
+    /* Disable overlay behavior on mobile and show caption below */
+    .gallery .item::after { display: none; }
 }
