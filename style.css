@@ -184,6 +184,11 @@ body {
     opacity: 0.9;
 }
 
+/* Globals */
+:root {
+    --card-min: 396px; /* desktop card width */
+}
+
 /* Mobile Styles */
 @media (max-width: 768px) {
     .sidebar { transform: translateX(-100%); }
@@ -386,6 +391,12 @@ body {
         flex: 1 1 auto;
         height: 100%;
     }
+}
+
+/* Biography paragraph: max width = 2 cards */
+#biography p {
+    max-width: calc(var(--card-min) * 2); /* optionally + 10px to include grid gap */
+    margin-right: auto; /* keep left-aligned */
 }
 
 /* Description text */
