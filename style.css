@@ -395,13 +395,17 @@ body {
 
 /* Biography paragraph: max width = 2 cards */
 #biography p {
-    max-width: calc(var(--card-min) * 2); /* optionally + 10px to include grid gap */
-    margin-right: auto; /* keep left-aligned */
+    max-width: calc(var(--card-min) * 2);
+    margin-right: auto;
+    text-align: justify;  /* justify text */
+    hyphens: auto;        /* nicer breaks */
 }
 
 /* Description text */
 .desc {
     text-align: justify;
     font-style: italic;
-    font-size: calc(1rem - 1pt); /* one point smaller than base */
+    font-size: calc(1rem - 2pt);   /* ~1px smaller from 16px base */
+    line-height: 1.4;       /* keep comfortable spacing */
+    hyphens: auto;          /* nicer justification */
 }
