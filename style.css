@@ -406,7 +406,7 @@ body {
     text-align: justify;
     font-style: italic;
     font-size: calc(1rem - 2pt);   /* ~1px smaller from 16px base */
-    line-height: 1.4;       /* keep comfortable spacing */
+    line-height: 1.5;       /* keep comfortable spacing */
     hyphens: auto;          /* nicer justification */
 }
 
