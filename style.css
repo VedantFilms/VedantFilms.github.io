@@ -224,14 +224,14 @@ body {
 
 /* Desktop: sizes and ratios */
 @media (min-width: 769px) {
-    /* 20% bigger cards */
+    /* 10% bigger cards */
     .gallery.grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
     }
 
-    /* Default desktop ratio for cards */
+    /* Default desktop ratio for all cards */
     .gallery .item {
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 16 / 9;
     }
 
     .gallery .item img,
@@ -239,11 +239,6 @@ body {
         width: 100%;
         height: 100%;
         object-fit: cover;
-    }
-
-    /* Director videos use 16:9 to avoid distortion */
-    #director.gallery .item {
-        aspect-ratio: 16 / 9;
     }
 }
 
