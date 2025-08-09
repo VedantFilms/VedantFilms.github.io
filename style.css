@@ -240,7 +240,7 @@ body {
         padding: 0;
         text-shadow: none;
         color: #ccc;
-        text-align: center;
+        text-align: left;
         margin-top: 5px;
         pointer-events: auto; /* captions are normal text on mobile */
     }
@@ -252,7 +252,7 @@ body {
 @media (min-width: 769px) {
     /* fixed card track width so media matches director cards */
     .gallery.grid {
-        --card-min: 330px;
+        --card-min: 396px; /* was 330px */
         grid-template-columns: repeat(auto-fill, minmax(var(--card-min), var(--card-min)));
         justify-content: start; /* was center */
     }
@@ -287,7 +287,7 @@ body {
 .gallery.grid > h2 {
     grid-column: 1 / -1;  /* span full width of the grid */
     color: #f0f;
-    margin: 0 0px 12px 0;
+    margin: 0 0px 8px 0;
 }
 
 /* Card with side text (PC) and stacked text (Mobile) */
@@ -328,7 +328,7 @@ body {
     color: #ccc;
 }
 .gallery .item.item-with-text .details .title {
-    color: #f0f;
+    color: rgb(255, 255, 255);
     margin: 0;
     font-size: 1rem;
 }
@@ -367,7 +367,7 @@ body {
 /* PC: keep media as a normal card width; let text area take extra space to the right */
 @media (min-width: 769px) {
     .gallery.grid {
-        --card-min: 330px;
+        --card-min: 396px; /* was 330px */
         grid-template-columns: repeat(auto-fill, minmax(var(--card-min), var(--card-min)));
         justify-content: start; /* was center */
     }
@@ -386,4 +386,11 @@ body {
         flex: 1 1 auto;
         height: 100%;
     }
+}
+
+/* Description text */
+.desc {
+    text-align: justify;
+    font-style: italic;
+    font-size: calc(1rem - 1pt); /* one point smaller than base */
 }
