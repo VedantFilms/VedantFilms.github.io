@@ -250,16 +250,16 @@ body {
 
 /* Desktop: sizes and ratios */
 @media (min-width: 769px) {
-    /* 10% bigger cards */
+    /* fixed card track width so media matches director cards */
     .gallery.grid {
-        grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+        --card-min: 330px;
+        grid-template-columns: repeat(auto-fill, minmax(var(--card-min), var(--card-min)));
+        justify-content: start; /* was center */
     }
-
     /* Default desktop ratio for all cards */
     .gallery .item {
         aspect-ratio: 16 / 9;
     }
-
     .gallery .item img,
     .gallery .item iframe {
         width: 100%;
@@ -288,4 +288,102 @@ body {
     grid-column: 1 / -1;  /* span full width of the grid */
     color: #f0f;
     margin: 0 0px 12px 0;
+}
+
+/* Card with side text (PC) and stacked text (Mobile) */
+.gallery .item.item-with-text {
+    /* override default card ratio behavior */
+    aspect-ratio: auto;
+    display: flex;
+    gap: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Disable hover overlay/caption for these split cards */
+.gallery .item.item-with-text::after { display: none; }
+.gallery .item.item-with-text .caption { display: none; }
+
+.gallery .item.item-with-text .media {
+    flex: 2 1 0;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+.gallery .item.item-with-text .media img,
+.gallery .item.item-with-text .media iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery .item.item-with-text .details {
+    flex: 1 1 0;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #0d0d0d;
+    border-left: 1px solid #1a1a1a;
+    color: #ccc;
+}
+.gallery .item.item-with-text .details .title {
+    color: #f0f;
+    margin: 0;
+    font-size: 1rem;
+}
+.gallery .item.item-with-text .details .btn {
+    margin-top: auto;
+    align-self: flex-start;
+    color: #fff;
+    text-decoration: none;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+.gallery .item.item-with-text .details .btn:hover {
+    background: #222;
+    transform: translateY(-1px);
+}
+
+/* Mobile: stack text under media */
+@media (max-width: 768px) {
+    .gallery .item.item-with-text {
+        display: block;
+    }
+    .gallery .item.item-with-text .media {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+    }
+    .gallery .item.item-with-text .details {
+        border-left: none;
+        background: transparent;
+        padding: 8px 0 0;
+    }
+}
+
+/* PC: keep media as a normal card width; let text area take extra space to the right */
+@media (min-width: 769px) {
+    .gallery.grid {
+        --card-min: 330px;
+        grid-template-columns: repeat(auto-fill, minmax(var(--card-min), var(--card-min)));
+        justify-content: start; /* was center */
+    }
+    .gallery .item.item-with-text {
+        grid-column: span 2;
+        display: flex;
+        align-items: stretch;
+        aspect-ratio: auto;
+    }
+    .gallery .item.item-with-text .media {
+        flex: 0 0 var(--card-min);
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+    }
+    .gallery .item.item-with-text .details {
+        flex: 1 1 auto;
+        height: 100%;
+    }
 }
