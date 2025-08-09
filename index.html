@@ -88,9 +88,23 @@
         </section>
         <section id="contact" class="contact">
             <h2>Contact</h2>
-            <p>Email: vedant@example.com</p>
-            <p>Phone: +91-XXXXXXXXXX</p>
+            <p>Email: vedant.sharma3156 [at] gmail [dot] com</p>
 
+            <!-- Phone reveal with simple captcha -->
+            <div id="phone-guard" class="phone-guard" data-p1="+91-836931" data-p2="10210099">
+                <button id="show-phone-btn" class="btn small" type="button">Show Phone Numbers</button>
+                <div id="captcha-box" class="captcha hidden" aria-live="polite">
+                    <label for="captcha-input">Solve to see: <span id="captcha-q"></span></label>
+                    <input id="captcha-input" type="text" inputmode="numeric" autocomplete="off" />
+                    <button id="captcha-verify" class="btn small" type="button">Verify</button>
+                    <span id="captcha-error" class="error" role="alert"></span>
+                </div>
+                <div id="phone-list" class="hidden">
+                    <p>Phone: <span id="phone1" class="phone-number"></span>4480, +91-96<span id="phone2" class="phone-number"></span></p>
+                </div>
+            </div>
+            <br>
+            <br>
             <div class="social-links">
                 <a href="https://www.imdb.com/name/nm9553592/" target="_blank" rel="noopener noreferrer" aria-label="Vedant Sharma on IMDb">
                     <img src="assets/imdb_logo.png" alt="IMDb" class="imdb-logo" loading="lazy">

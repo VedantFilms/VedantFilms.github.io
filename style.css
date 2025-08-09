@@ -414,3 +414,38 @@ body {
 #director .item iframe {
     filter: brightness(0.95) saturate(0.7);
 }
+
+.hidden { display: none !important; }
+
+.phone-guard { margin-top: 6px; }
+.phone-guard .btn {
+    background: #1a1a1a;
+    color: #fff;
+    border: 1px solid #2a2a2a;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.phone-guard .btn.small { font-size: 0.9rem; line-height: 1; }
+.phone-guard .btn:hover { background: #222; }
+
+.phone-guard .captcha {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 10px;
+}
+.phone-guard .captcha label { color: #ccc; font-size: 0.9rem; }
+.phone-guard .captcha input {
+    width: 70px;
+    padding: 4px 6px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background: #0d0d0d;
+    color: #fff;
+}
+.phone-guard .captcha .error { color: #ff6b6b; font-size: 0.85rem; margin-left: 4px; }
+
+@media (max-width: 768px) {
+    .phone-guard .captcha { display: block; margin: 8px 0 0; }
+}
