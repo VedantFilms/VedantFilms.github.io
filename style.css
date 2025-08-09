@@ -409,3 +409,8 @@ body {
     line-height: 1.4;       /* keep comfortable spacing */
     hyphens: auto;          /* nicer justification */
 }
+
+/* Subtle 5% darken and 10% desaturate on Director videos (thumbnails and playback) */
+#director .item iframe {
+    filter: brightness(0.95) saturate(0.7);
+}
