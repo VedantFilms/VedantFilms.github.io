@@ -448,4 +448,7 @@ body {
 
 @media (max-width: 768px) {
     .phone-guard .captcha { display: block; margin: 8px 0 0; }
+    .caption {
+        display: none !important;
+    }
 }
